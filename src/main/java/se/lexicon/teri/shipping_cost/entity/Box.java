@@ -1,16 +1,18 @@
 package se.lexicon.teri.shipping_cost.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
 public class Box {
 
     @Id
     private final UUID id;
     private String name;
     private String country;
-    private String type;
+    private String packageType;
     private double cost;
     private double weight;
     private String weightType;
@@ -41,12 +43,12 @@ public class Box {
         this.country = country;
     }
 
-    public String getType() {
-        return type;
+    public String getPackageType() {
+        return packageType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setPackageType(String packageType) {
+        this.packageType = packageType;
     }
 
     public double getCost() {

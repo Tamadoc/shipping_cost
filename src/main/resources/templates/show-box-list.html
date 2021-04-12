@@ -13,5 +13,43 @@
 
 <body>
 
+<main class="container m-3 p-3">
+    <section class="card">
+        <div class="card-header bg-dark text-white">
+            <h1>Show List</h1>
+            <a th:href="@{/add-package}" class="btn btn-outline-success">Add Form</a>
+        </div>
+
+        <div class="card-body">
+            <table>
+                <thead class="table table-dark">
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Type</td>
+                    <td>Country</td>
+                    <td>Weight</td>
+                    <td>Cost</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card-footer">
+            <a th:href="@{/}" class="btn btn-outline-danger">Back</a>
+        </div>
+    </section>
+</main>
+
 </body>
 </html>
