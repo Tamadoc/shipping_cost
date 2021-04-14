@@ -8,14 +8,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
+//@Data =
+//  @Getter
+//  @Setter
+//  @RequiredArgsConstructor
+//  @ToString
+//  @EqualsAndHashCode
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+@NoArgsConstructor
 @Entity
 public class Box {
 
@@ -26,21 +30,26 @@ public class Box {
     private String id;
 
     @Column(nullable = false, length = 100)
+    @NotNull(message =  "Name should not be null")
+    @Size(min = 4, max = 20, message = "Name length should be between 4 and 20 characters")
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
+    @NotBlank(message = "Country should not be empty")
     private String country;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String packageType;
 
-    @Column()
+    @Column(nullable = false)
     private double cost;
 
     @Column(nullable = false)
+    @Min(value = 0, message = "Weight should not be less than 0")
+    @Max(value = 1900, message = "Weight should not be greater than 1900")
     private double weight;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String weightType;
 
     @CreationTimestamp
@@ -49,4 +58,24 @@ public class Box {
 
     @Column(nullable = false, columnDefinition = "TINYINT(1) default 1")
     private boolean status = true;
+
+
+    public double calcShippingCost() {
+        double feePerUnit;
+        double countryMultiplier;
+
+        if (weightType.equalsIgnoreCase("kg")) {
+            feePerUnit = 1000;
+        } else {
+            feePerUnit = 2;
+        }
+
+        if (country.equalsIgnoreCase("sweden")) {
+            countryMultiplier = 2.5;
+        } else {
+            countryMultiplier = 7;
+        }
+
+        return weight * feePerUnit * countryMultiplier;
+    }
 }
